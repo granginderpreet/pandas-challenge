@@ -17,4 +17,4 @@
 #per grade math and english reading scores were based on calulating series mean and combining pd.series and combining into a dataFrame  with each column representing one grade
 #binning was done for lst part of the assignment using the pd.cut() function and then groupby().mean() to get the mean values for each of the bins.
 
-plot() function was used to plot some of the plots and analysis was provided in the word document
+#plot() function was used to plot some of the plots and analysis was provided in the word document
