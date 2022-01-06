@@ -162,16 +162,15 @@ def format2(x):
 def format3(x):
     return "{:.0f}".format(x)
 
-grouped_schools_summary_final_df1=pd.DataFrame({})
-#grouped_schools_summary_final_df1=grouped_schools_summary_final_df
-grouped_schools_summary_final_df1["Total School Budget"]=grouped_schools_summary_final_df["Total School Budget"].apply(format)
-#grouped_schools_summary_final_df1["Budget per student"]=grouped_schools_summary_final_df["Budget per student"].apply(format1)
-grouped_schools_summary_final_df1["Average Reading Score"]=grouped_schools_summary_final_df["Average Reading Score"].apply(format2)
-grouped_schools_summary_final_df1["Average Math Score"]=grouped_schools_summary_final_df["Average Math Score"].apply(format2)
-grouped_schools_summary_final_df1["% Passing Math Score"]=grouped_schools_summary_final_df["% Passing Math Score"].apply(format2)
-grouped_schools_summary_final_df1["% Passing Reading Score"]=grouped_schools_summary_final_df["% Passing Reading Score"].apply(format2)
-grouped_schools_summary_final_df1["% Passing Overall Score"]=grouped_schools_summary_final_df["% Passing Overall Score"].apply(format2)
-grouped_schools_summary_final_df1["Total Students"]=grouped_schools_summary_final_df["Total Students"].apply(format3)
+grouped_schools_summary_final_df1=grouped_schools_summary_final_df.copy()
+grouped_schools_summary_final_df1["Total School Budget"]=grouped_schools_summary_final_df1["Total School Budget"].apply(format)
+grouped_schools_summary_final_df1["Budget per student"]=grouped_schools_summary_final_df1["Budget per student"].apply(format1)
+grouped_schools_summary_final_df1["Average Reading Score"]=grouped_schools_summary_final_df1["Average Reading Score"].apply(format2)
+grouped_schools_summary_final_df1["Average Math Score"]=grouped_schools_summary_final_df1["Average Math Score"].apply(format2)
+grouped_schools_summary_final_df1["% Passing Math Score"]=grouped_schools_summary_final_df1["% Passing Math Score"].apply(format2)
+grouped_schools_summary_final_df1["% Passing Reading Score"]=grouped_schools_summary_final_df1["% Passing Reading Score"].apply(format2)
+grouped_schools_summary_final_df1["% Passing Overall Score"]=grouped_schools_summary_final_df1["% Passing Overall Score"].apply(format2)
+grouped_schools_summary_final_df1["Total Students"]=grouped_schools_summary_final_df1["Total Students"].apply(format3)
 grouped_schools_summary_final_df1
 
 
@@ -282,8 +281,8 @@ budget_labels = ["<=$585", "$585-$630", "$630-$645","$645-$680"]
 
 
 # cut() returns a Pandas Series containing each of the binned column's values translated into their corresponding bins
-grouped_schools_summary_final_df2=grouped_schools_summary_final_df
-grouped_schools_summary_final_df2["Budget range"]=pd.cut(grouped_schools_summary_final_df["Budget per student"], budget_bins, labels=budget_labels)
+grouped_schools_summary_final_df2=grouped_schools_summary_final_df.copy()
+grouped_schools_summary_final_df2["Budget range"]=pd.cut(grouped_schools_summary_final_df2["Budget per student"], budget_bins, labels=budget_labels)
 groupedBudgetPerStudent_df2 = grouped_schools_summary_final_df2.groupby(["Budget range"]).mean()
 groupedBudgetPerStudent_df2=groupedBudgetPerStudent_df2[["Average Reading Score","Average Math Score","% Passing Math Score","% Passing Reading Score","% Passing Overall Score"]]
 groupedBudgetPerStudent_df2.plot()
@@ -315,8 +314,8 @@ student_bins = [0,1000,2000,3000,4000,5000]
 student_labels = ["<=1000", "1000-2000", "2000-3000","3000-4000","4000-5000"]
 
 # cut() returns a Pandas Series containing each of the binned column's values translated into their corresponding bins
-grouped_schools_summary_final_df2=grouped_schools_summary_final_df
-grouped_schools_summary_final_df2["School Size"]=pd.cut(grouped_schools_summary_final_df["Total Students"], student_bins, labels=student_labels)
+grouped_schools_summary_final_df2=grouped_schools_summary_final_df.copy()
+grouped_schools_summary_final_df2["School Size"]=pd.cut(grouped_schools_summary_final_df2["Total Students"], student_bins, labels=student_labels)
 
 groupedBudgetPerStudent_df2 = grouped_schools_summary_final_df2.groupby(["School Size"]).mean()
 
