@@ -26,7 +26,7 @@
 # 
 # * Optional: give the displayed data cleaner formatting
 
-# In[1]:
+# In[3]:
 
 
 # Dependencies and Setup
@@ -98,15 +98,14 @@ summary_df
 #   
 # * Create a dataframe to hold the above results
 
-# In[2]:
+# In[4]:
 
 
 # Create pass fail conditions and columns that save the pass fail value as 0 or 100
 grouped_schools_summary_final_df={}
 math_conditions = [
     (school_data_complete['math_score'] < 70),
-    (school_data_complete['math_score'] >=70) 
-    ]
+    (school_data_complete['math_score'] >=70) ]
 reading_conditions = [
     (school_data_complete['reading_score'] < 70),
     (school_data_complete['reading_score'] >=70) ]
@@ -163,14 +162,14 @@ def format3(x):
     return "{:.0f}".format(x)
 
 grouped_schools_summary_final_df1=grouped_schools_summary_final_df.copy()
-grouped_schools_summary_final_df1["Total School Budget"]=grouped_schools_summary_final_df1["Total School Budget"].apply(format)
-grouped_schools_summary_final_df1["Budget per student"]=grouped_schools_summary_final_df1["Budget per student"].apply(format1)
-grouped_schools_summary_final_df1["Average Reading Score"]=grouped_schools_summary_final_df1["Average Reading Score"].apply(format2)
-grouped_schools_summary_final_df1["Average Math Score"]=grouped_schools_summary_final_df1["Average Math Score"].apply(format2)
-grouped_schools_summary_final_df1["% Passing Math Score"]=grouped_schools_summary_final_df1["% Passing Math Score"].apply(format2)
-grouped_schools_summary_final_df1["% Passing Reading Score"]=grouped_schools_summary_final_df1["% Passing Reading Score"].apply(format2)
-grouped_schools_summary_final_df1["% Passing Overall Score"]=grouped_schools_summary_final_df1["% Passing Overall Score"].apply(format2)
-grouped_schools_summary_final_df1["Total Students"]=grouped_schools_summary_final_df1["Total Students"].apply(format3)
+grouped_schools_summary_final_df1["Total School Budget"]=grouped_schools_summary_final_df1["Total School Budget"].map(format)
+grouped_schools_summary_final_df1["Budget per student"]=grouped_schools_summary_final_df1["Budget per student"].map(format1)
+grouped_schools_summary_final_df1["Average Reading Score"]=grouped_schools_summary_final_df1["Average Reading Score"].map(format2)
+grouped_schools_summary_final_df1["Average Math Score"]=grouped_schools_summary_final_df1["Average Math Score"].map(format2)
+grouped_schools_summary_final_df1["% Passing Math Score"]=grouped_schools_summary_final_df1["% Passing Math Score"].map(format2)
+grouped_schools_summary_final_df1["% Passing Reading Score"]=grouped_schools_summary_final_df1["% Passing Reading Score"].map(format2)
+grouped_schools_summary_final_df1["% Passing Overall Score"]=grouped_schools_summary_final_df1["% Passing Overall Score"].map(format2)
+grouped_schools_summary_final_df1["Total Students"]=grouped_schools_summary_final_df1["Total Students"].map(format3)
 grouped_schools_summary_final_df1
 
 
@@ -180,7 +179,7 @@ grouped_schools_summary_final_df1
 
 # * Sort and display the top five performing schools by % overall passing.
 
-# In[3]:
+# In[5]:
 
 
 # Top 5 schools based on overall passing score
@@ -191,7 +190,7 @@ grouped_schools_summary_final_df1.sort_values("% Passing Overall Score",ascendin
 
 # * Sort and display the five worst-performing schools by % overall passing.
 
-# In[4]:
+# In[6]:
 
 
 grouped_schools_summary_final_df1.sort_values("% Passing Overall Score",ascending=True)[0:5]
@@ -209,7 +208,7 @@ grouped_schools_summary_final_df1.sort_values("% Passing Overall Score",ascendin
 #   
 #   * Optional: give the displayed data cleaner formatting
 
-# In[5]:
+# In[15]:
 
 
 
@@ -239,6 +238,11 @@ allGradesMath['9th'] = Nineth_math_series
 allGradesMath['10th'] = Tenth_math_series
 allGradesMath['11th'] = Eleventh_math_series
 allGradesMath['12th'] = Twelvth_math_series
+
+allGradesMath["9th"]=allGradesMath["9th"].map(format2)
+allGradesMath["10th"]=allGradesMath["10th"].map(format2)
+allGradesMath["11th"]=allGradesMath["11th"].map(format2)
+allGradesMath["12th"]=allGradesMath["12th"].map(format2)
 allGradesMath
 
 
@@ -246,7 +250,7 @@ allGradesMath
 
 # * Perform the same operations as above for reading scores
 
-# In[6]:
+# In[16]:
 
 
 
@@ -261,6 +265,10 @@ allGradesReading['9th'] = Nineth_reading_series
 allGradesReading['10th'] = Tenth_reading_series
 allGradesReading['11th'] = Eleventh_reading_series
 allGradesReading['12th'] = Twelvth_reading_series
+allGradesReading["9th"]=allGradesReading["9th"].map(format2)
+allGradesReading["10th"]=allGradesReading["10th"].map(format2)
+allGradesReading["11th"]=allGradesReading["11th"].map(format2)
+allGradesReading["12th"]=allGradesReading["12th"].map(format2)
 allGradesReading
 
 #Scores by Budget per student
@@ -271,7 +279,7 @@ allGradesReading
 #   * % Passing Reading
 #   * Overall Passing Rate (Average of the above two)
 
-# In[7]:
+# In[17]:
 
 
 #Binning into ranges as requested
@@ -300,13 +308,13 @@ groupedBudgetPerStudent_df2
 
 # * Perform the same operations as above, based on school size.
 
-# In[8]:
+# In[18]:
 
 
 #Scores by school size
 
 
-# In[9]:
+# In[19]:
 
 
 #binning per thousand
@@ -334,7 +342,7 @@ groupedBudgetPerStudent_df2
 
 # * Perform the same operations as above, based on school type
 
-# In[10]:
+# In[24]:
 
 
 # cut() returns a Pandas Series containing each of the binned column's values translated into their corresponding bins
@@ -352,7 +360,7 @@ groupedBudgetPerStudent_df2["% Passing Overall Score"]=groupedBudgetPerStudent_d
 groupedBudgetPerStudent_df2
 
 
-# In[11]:
+# In[30]:
 
 
 
@@ -371,9 +379,8 @@ groupedBudgetPerStudent_df2 = groupedBudgetPerStudent_df2[["Budget per student",
 groupedBudgetPerStudent_df2[["Average Reading Score","Average Math Score",
                              "% Passing Math Score","% Passing Reading Score","% Passing Overall Score"]].plot()
 groupedBudgetPerStudent_df2[["Budget per student"]].plot()
-
 #Update format
-grouped_schools_summary_final_df2["Budget per student"]=grouped_schools_summary_final_df2["Budget per student"].apply(format1)
+groupedBudgetPerStudent_df2["Budget per student"]=groupedBudgetPerStudent_df2["Budget per student"].apply(format1)
 groupedBudgetPerStudent_df2["Average Math Score"]=groupedBudgetPerStudent_df2["Average Math Score"].apply(format2)
 groupedBudgetPerStudent_df2["Average Reading Score"]=groupedBudgetPerStudent_df2["Average Reading Score"].apply(format2)
 groupedBudgetPerStudent_df2["% Passing Math Score"]=groupedBudgetPerStudent_df2["% Passing Math Score"].apply(format2)
